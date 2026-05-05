@@ -20,78 +20,65 @@
 
     <style>
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f4f6f9;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
             padding: 20px;
-            box-sizing: border-box;
         }
-        .form-card {
-            background: #ffffff;
-            padding: 32px;
+        .form-container {
+            background: white;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
         }
-        .form-card h2 {
-            color: #16325c;
-            margin-top: 0;
-            margin-bottom: 8px;
-            text-align: center;
-            font-size: 24px;
-        }
-        .form-card p {
-            color: #4a4a4a;
-            text-align: center;
-            margin-bottom: 24px;
-            font-size: 14px;
-        }
-        .form-group {
-            margin-bottom: 16px;
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #16325c;
-            font-size: 13px;
-        }
-        input[type="text"], textarea {
-            padding: 10px 12px;
-            border: 1px solid #c9c9c9;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: all 0.2s ease-in-out;
-        }
-        input[type="text"]:focus, textarea:focus {
-            outline: none;
-            border-color: #0070d2;
-            box-shadow: 0 0 3px rgba(0, 112, 210, 0.5);
-        }
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-        .recaptcha-container {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-        input[type="submit"] {
-            background-color: #0070d2;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2
+        h2 { color: #16325c; text-align: center; margin-top: 0; }
+        label { font-weight: bold; font-size: 14px; color: #333; display: block; margin-top: 15px; margin-bottom: 5px; }
+        input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { min-height: 80px; resize: vertical; }
+        .submit-btn { background-color: #0070d2; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-size: 16px; cursor: pointer; margin-top: 20px; font-weight: bold; }
+        .submit-btn:hover { background-color: #005fb2; }
+        .captcha-box { margin-top: 20px; display: flex; justify-content: center; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Submit a Support Case</h2>
+        
+        <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DWs00000MhTZx" method="POST">
+            
+            <input type="hidden" name="captcha_settings" value='{"keyname":"GitPage","fallback":"true","orgId":"00DWs00000MhTZx","ts":""}'>
+            <input type="hidden" name="orgid" value="00DWs00000MhTZx">
+            <input type="hidden" name="retURL" value="https://storm-86da3e1dee9542.lightning.force.com/">
+            <input type="hidden" id="external" name="external" value="1" />
+
+            <label for="name">Contact Name</label>
+            <input id="name" maxlength="80" name="name" size="20" type="text" required />
+
+            <label for="email">Email</label>
+            <input id="email" maxlength="80" name="email" size="20" type="text" required />
+
+            <label for="phone">Phone</label>
+            <input id="phone" maxlength="40" name="phone" size="20" type="text" />
+
+            <label for="subject">Subject</label>
+            <input id="subject" maxlength="80" name="subject" size="20" type="text" required />
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <div class="captcha-box">
+                <div class="g-recaptcha" data-sitekey="6Lc0mNksAAAAAJo6kLJxcCW_694onvNVBNJfoYaJ"></div>
+            </div>
+
+            <input type="submit" name="submit" value="Submit Case" class="submit-btn">
+            
+        </form>
+    </div>
+
+</body>
+</html>
