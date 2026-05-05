@@ -1,20 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Portal</title>
-</head>
-<body style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; margin:0; font-family:sans-serif; background-color:#f4f6f9;">
-
-    <h1 style="color:#16325c; margin-bottom: 8px;">Welcome to the Support Portal</h1>
+    <title>Submit a Case</title>
     
-    <p style="color:#4a4a4a; margin-bottom: 24px;">Need help? Submit a case directly.</p>
-    
-    <a href="https://your-web-to-case-form-url.com" target="_blank"
-       style="padding:12px 24px; background:#0070d2; color:white; border-radius:4px; text-decoration:none; font-weight:bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-      Submit a Case
-    </a>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+     function timestamp() { 
+         var response = document.getElementById("g-recaptcha-response"); 
+         if (response == null || response.value.trim() == "") {
+             var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
+             elems["ts"] = JSON.stringify(new Date().getTime());
+             document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); 
+         } 
+     } 
+     setInterval(timestamp, 500); 
+    </script>
 
-</body>
-</html>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .form-card {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+        }
+        .form-card h2 {
+            color: #16325c;
+            margin-top: 0;
+            margin-bottom: 8px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .form-card p {
+            color: #4a4a4a;
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #16325c;
+            font-size: 13px;
+        }
+        input[type="text"], textarea {
+            padding: 10px 12px;
+            border: 1px solid #c9c9c9;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease-in-out;
+        }
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #0070d2;
+            box-shadow: 0 0 3px rgba(0, 112, 210, 0.5);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .recaptcha-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        input[type="submit"] {
+            background-color: #0070d2;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2
